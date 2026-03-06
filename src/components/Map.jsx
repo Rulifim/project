@@ -1,10 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../App.css";
 import useMapConnect from "./useMapConnect";
 import pointer from "../assets/pointer.png"
 
+
 const Map = () => {
+  const activeInfoWindow = useRef(null);
   const [map, setMap] = useState(null);
 
   const churches = [
@@ -34,7 +36,7 @@ const Map = () => {
   position: { lat: 52.300785880624176, lng: 104.29494447609984 },
   title: "Знаменский монастырь (Знаменская церковь)",
   address: "Ангарская ул., 14, Иркутск",
-  img: "https://monasterium.ru/upload/resize_cache/iblock/d43/d43a7f0cf66bd2f78eb8e744a670cac9/650_375_1/1.jpg",
+  img: "https://s3.regru.cloud/monasterium/resize_cache/116613/59941cad64831bc9fd3d0170114502c0/iblock/d43/d43a7f0cf66bd2f78eb8e744a670cac9/1.jpg",
   text: "Основан в 1689 году — один из старейших монастырей Сибири.<br><br>Главный храм построен в XVIII веке.<br><br>Монастырь играл важную роль в духовной жизни региона.<br><br>Здесь похоронены известные деятели истории Сибири."
 }, 
 {
@@ -83,7 +85,7 @@ const Map = () => {
   position: { lat: 52.29125070615625, lng: 104.28165796445906 },
   title: "Храм во имя Спаса Нерукотворного Образа (Спасская церковь)",
   address: "ул. Сухэ-Батора, 2, Иркутск",
-  img: "https://extour-skazka.ru/upload/iblock/c99/6aja4b8qdfshecbzw0farksbszch85s2/KHram-vo-imya-Spasa-Nerukotvornogo-Obraza_foto-1.jpeg",
+  img: "https://cdn.culture.ru/c/95343.jpg",
   text: "Первый каменный храм Иркутского острога, освящён в 1710 году.<br><br>Сохраняет уникальные наружные фрески XIX века.<br><br>Типичный образец ранних посадских церквей Сибири."
 }
 
@@ -114,31 +116,52 @@ const Map = () => {
   const placeMarker = (church) => {
     if (!map) return;
 
-    const marker = new window.google.maps.Marker({
+    const marker = new window.google.maps.marker.AdvancedMarkerElement({
       position: church.position,
       map,
-      icon: {
-        url: pointer,
-        scaledSize: new window.google.maps.Size(40, 40),
-      },
     });
 
     const infoWindow = new window.google.maps.InfoWindow({
       content: `
         <div class="info-window">
+          <button class="close-btn">✖</button>
+
           <strong>${church.title}</strong><br><br>
           <p class="adress">${church.address}</p><br>
           <img class="icon" src="${church.img}"/>
           <p class="desc">${church.text}</p>
+
           <form action="https://google.com">
-            <input class="link" type="submit" value="больше о церкви " />
+            <input class="link" type="submit" value="больше о церкви" />
           </form>
         </div>
       `,
     });
 
     marker.addListener("click", () => {
-      infoWindow.open(map, marker);
+
+      // закрыть предыдущее окно
+      if (activeInfoWindow.current) {
+        activeInfoWindow.current.close();
+      }
+
+      infoWindow.open({
+        anchor: marker,
+        map,
+      });
+
+      activeInfoWindow.current = infoWindow;
+
+      // ждём пока DOM окна появится
+      setTimeout(() => {
+        const closeBtn = document.querySelector(".close-btn");
+        if (closeBtn) {
+          closeBtn.onclick = () => {
+            infoWindow.close();
+          };
+        }
+      }, 50);
+
     });
   };
 
