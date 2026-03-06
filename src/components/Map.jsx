@@ -6,11 +6,12 @@ import pointer from "../assets/pointer.png"
 
 
 const Map = () => {
+  console.log("1")
   const activeInfoWindow = useRef(null);
   const [map, setMap] = useState(null);
 
   const churches = [
-
+  
   {
   position: { lat: 52.29229780105789, lng: 104.28264482239582 },
   title: "Богоявленский собор",
