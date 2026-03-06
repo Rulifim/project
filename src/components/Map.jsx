@@ -6,7 +6,7 @@ import pointer from "../assets/pointer.png"
 
 
 const Map = () => {
-  console.log("1")
+  console.log("2")
   const activeInfoWindow = useRef(null);
   const [map, setMap] = useState(null);
 
@@ -99,6 +99,7 @@ const Map = () => {
       {
         center: { lat: 52.27880668234576, lng: 104.3037687500459 },
         zoom: 12,
+        mapId: "79153152354b1bb86b30cdd5"
       }
     );
 
