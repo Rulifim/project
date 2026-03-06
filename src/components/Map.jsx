@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "../App.css";
 import useMapConnect from "./useMapConnect";
 import pointer from "../assets/pointer.png"
+import { url } from "inspector";
 
 
 const Map = () => {
@@ -17,6 +18,7 @@ const Map = () => {
   title: "Богоявленский собор",
   address: "ул. Сухэ-Батора, 1А, Иркутск",
   img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Church_of_the_Epiphany_%28Irkutsk%29.jpg",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Один из древнейших храмов города, возведён в 1718–1746 годах.<br><br>Яркий памятник сибирского барокко с богатым фасадным декором.<br><br>Многократно страдал от пожаров и землетрясений.<br><br>Полностью восстановлен в конце XX века."
 },
 {
@@ -24,6 +26,7 @@ const Map = () => {
   title: "Свято-Троицкая церковь",
   address: "ул. 5-й Армии, 8, Иркутск",
   img: "https://upload.wikimedia.org/wikipedia/commons/2/24/Trinity_Church_in_Irkutsk.jpg",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Возведена в 1778 году и считается одним из наиболее цельно сохранившихся храмов Иркутска.<br><br>Выдающийся образец сибирского барокко с многоярусной композицией.<br><br>Архитектура восходит к традициям деревянных ярусных церквей Прибайкалья.<br><br>Декор сочетает древнерусские и барочные мотивы."
 },
 {
@@ -31,6 +34,7 @@ const Map = () => {
   title: "Крестовоздвиженская церковь",
   address: "ул. Седова, 1, Иркутск",
   img: "https://upload.wikimedia.org/wikipedia/commons/6/69/Church_of_the_Raising_of_the_Holy_Cross%2C_Irkutsk_%28winter%29.jpg",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Построена в 1747–1760 годах.<br><br>Один из самых декоративных храмов Сибири.<br><br>Фасады украшены сложной резьбой, изразцами и фигурными наличниками.<br><br>Не имеет прямых аналогов в русской архитектуре."
 },
 {
@@ -38,6 +42,7 @@ const Map = () => {
   title: "Знаменский монастырь (Знаменская церковь)",
   address: "Ангарская ул., 14, Иркутск",
   img: "https://s3.regru.cloud/monasterium/resize_cache/116613/59941cad64831bc9fd3d0170114502c0/iblock/d43/d43a7f0cf66bd2f78eb8e744a670cac9/1.jpg",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Основан в 1689 году — один из старейших монастырей Сибири.<br><br>Главный храм построен в XVIII веке.<br><br>Монастырь играл важную роль в духовной жизни региона.<br><br>Здесь похоронены известные деятели истории Сибири."
 }, 
 {
@@ -45,6 +50,7 @@ const Map = () => {
   title: "Казанская церковь",
   address: "ул. Баррикад, 34/1, Иркутск",
   img: "https://s12.stc.all.kpcdn.net/russia/wp-content/uploads/2019/03/Kazanskaya-tserkov-2048.jpg",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Возведена в конце XIX века.<br><br>Крупный городской храм в русско-византийском стиле.<br><br>Отличается массивным объёмом и выразительными куполами.<br><br>Является одним из главных действующих храмов города."
 },
 {
@@ -52,6 +58,7 @@ const Map = () => {
   title: "Михайло-Архангельская церковь",
   address: "ул. 5-й Армии, 59, Иркутск",
   img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmFhuIF1-ruG2K-ZxUu2So7Uyz-r_n_JqF8Q&s",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Построена в начале XX века для рабочих окраин города.<br><br>Архитектура сочетает элементы эклектики и неорусского стиля.<br><br>Закрывалась в советский период.<br><br>Возвращена верующим и восстановлена."
 },
 { 
@@ -59,6 +66,7 @@ const Map = () => {
   title: "Храм Веры, Надежды, Любови и матери их Софии",
   address: "Байкальская ул., 165 В, Иркутск",
   img: "https://avatars.mds.yandex.net/get-altay/15452616/2a000001998093b1d36a374d5bceca94ac55/L_height",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Современный храм, построенный в конце XX – начале XXI века.<br><br>Служит духовным центром жилых районов.<br><br>Архитектура выдержана в традициях православного зодчества.<br><br>Активно участвует в социальной деятельности."
 },
 { 
@@ -66,6 +74,7 @@ const Map = () => {
   title: "Храм Рождества Христова",
   address: "ул. Мира, 122А, Иркутск",
   img: "https://avatars.mds.yandex.net/get-altay/5111241/2a00000181fa7ed410b6bd2024efa0a1587e/L_height",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Построен в постсоветский период.<br><br>Обслуживает юго-западные районы Иркутска.<br><br>Архитектура сочетает традиционные формы и современные решения.<br><br>Является действующим приходским храмом."
 },
 { 
@@ -73,6 +82,7 @@ const Map = () => {
   title: "Храм святой блаженной Ксении Петербургской",
   address: "Советская ул., 57а, Иркутск",
   img: "https://pravprihod.ru/dyn_images/img26408.jpg",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Создан как больничный храм на территории Ивано-Матрёнинской детской больницы.<br><br>Приход активно занимается социальной и благотворительной деятельностью."
 },
 { 
@@ -80,6 +90,7 @@ const Map = () => {
   title: "Входо-Иерусалимская церковь",
   address: "ул. Борцов Революции, 15, Иркутск",
   img: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Church_of_the_Entry_of_the_Lord_into_Jerusalem_in_Irkutsk_%28September_2025%29_-_0_1.jpg",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Построена в XVIII веке.<br><br>Сочетает классицизм с уникальными росписями и необычной лестницей.<br><br>Колокольня восстановлена в XXI веке."
 },
 {
@@ -87,6 +98,7 @@ const Map = () => {
   title: "Храм во имя Спаса Нерукотворного Образа (Спасская церковь)",
   address: "ул. Сухэ-Батора, 2, Иркутск",
   img: "https://cdn.culture.ru/c/95343.jpg",
+  l: "https://gemini.google.com/app/21781a71d2c5895d",
   text: "Первый каменный храм Иркутского острога, освящён в 1710 году.<br><br>Сохраняет уникальные наружные фрески XIX века.<br><br>Типичный образец ранних посадских церквей Сибири."
 }
 
@@ -133,7 +145,7 @@ const Map = () => {
           <img class="icon" src="${church.img}"/>
           <p class="desc">${church.text}</p>
 
-          <form action="https://google.com">
+          <form action="${church.l}">
             <input class="link" type="submit" value="больше о церкви" />
           </form>
         </div>
