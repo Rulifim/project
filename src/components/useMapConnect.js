@@ -1,25 +1,35 @@
 import { useEffect } from "react";
 
 const useMapConnect = (initMap) => {
-	useEffect(() => {
-		if (!window.google) {
-			const script = document.createElement("script");
+  useEffect(() => {
 
-			script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAhLeqlpNZ9SBsFzHyozvz0vxXH4mO_e-0&libraries=marker";;
-			script.async = true;
-			script.defer = true;
+    if (window.google && window.google.maps) {
+      initMap();
+      return;
+    }
 
-			script.onload = () => {
-				initMap();
-			};
+    const existingScript = document.querySelector(
+      'script[src*="maps.googleapis.com/maps/api/js"]'
+    );
 
-			document.body.appendChild(script);
+    if (existingScript) {
+      existingScript.addEventListener("load", initMap);
+      return;
+    }
 
-			return () => document.body.removeChild(script);
-		}
+    const script = document.createElement("script");
 
-		initMap();
-	}, []);
+    script.src =
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyAhLeqlpNZ9SBsFzHyozvz0vxXH4mO_e-0&libraries=marker";
+
+    script.async = true;
+    script.defer = true;
+
+    script.onload = initMap;
+
+    document.head.appendChild(script);
+
+  }, []);
 };
 
 export default useMapConnect;
