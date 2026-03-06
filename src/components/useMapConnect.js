@@ -5,7 +5,7 @@ const useMapConnect = (initMap) => {
 		if (!window.google) {
 			const script = document.createElement("script");
 
-			script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAhLeqlpNZ9SBsFzHyozvz0vxXH4mO_e-0&libraries=marker&callback=initMap`;
+			script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAhLeqlpNZ9SBsFzHyozvz0vxXH4mO_e-0&libraries=marker";;
 			script.async = true;
 			script.defer = true;
 
