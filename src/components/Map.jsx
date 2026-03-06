@@ -18,7 +18,7 @@ const Map = () => {
   title: "Богоявленский собор",
   address: "ул. Сухэ-Батора, 1А, Иркутск",
   img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Church_of_the_Epiphany_%28Irkutsk%29.jpg",
-  l: "https://gemini.google.com/app/21781a71d2c5895d",
+  l: "https://www.youtube.com/",
   text: "Один из древнейших храмов города, возведён в 1718–1746 годах.<br><br>Яркий памятник сибирского барокко с богатым фасадным декором.<br><br>Многократно страдал от пожаров и землетрясений.<br><br>Полностью восстановлен в конце XX века."
 },
 {
