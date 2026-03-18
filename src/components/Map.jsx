@@ -160,7 +160,7 @@ const Map = () => {
     const infoWindow = new window.google.maps.InfoWindow({
       content: `
         <div class="info-window">
-          <button class="close-btn">✖</button>
+          <button class="close-btn"></button>
 
           <strong>${church.title}</strong><br><br>
           <p class="adress">${church.address}</p><br>
