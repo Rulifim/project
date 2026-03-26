@@ -215,28 +215,24 @@
 }
 
 /* Заменили <form> на <a> — стилизуем ссылку как кнопку */
-a.link {
-  display: block;
+.link {
   width: 100%;
-  margin-top: 12px;
   padding: 10px 14px;
   background-color: var(--accent);
   color: #fff;
   border-radius: 10px;
+  border: 0;
   font-family: inherit;
   font-weight: 700;
-  font-size: 0.95rem;
-  text-align: center;
-  text-decoration: none;
-  transition: filter 0.15s;
 }
 
-a.link:hover {
-  filter: brightness(1.1);
+.link:hover {
+  cursor: pointer;
+  filter: brightness(1.05);
 }
 
 .close-btn {
-  position: absolute;
+  position: absolute;   
   top: 5px;
   right: 5px;
   border: none;
