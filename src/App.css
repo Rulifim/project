@@ -24,6 +24,8 @@
     radial-gradient(circle at top left, rgba(218, 173, 98, 0.28), transparent 36%),
     radial-gradient(circle at top right, rgba(143, 73, 44, 0.18), transparent 26%),
     linear-gradient(180deg, #fbf6ef 0%, var(--page-bg) 100%);
+  /* Prevent horizontal overflow on mobile */
+  overflow-x: hidden;
 }
 
 .page-shell::before {
@@ -89,7 +91,6 @@
 }
 
 .hero-lead {
-
   margin: 24px 0 0;
   font-size: 1.08rem;
 }
@@ -167,63 +168,71 @@
   background: var(--surface-strong);
 }
 
+/* ─── КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: карта через CSS, не через window.innerWidth ─── */
 .map-canvas {
+  display: block;
   width: 100%;
   height: clamp(420px, 68vh, 760px);
   border-radius: 20px;
 }
 
+/* ─── Info Window ─── */
 .info-window {
-  max-width: 400px;
+  max-width: 360px;
   position: relative;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-}
-
-.info-window img {
-  width: 100%;
-  border-radius: 14px;
-  margin-bottom: 10px;
-}
-
-img[src="https://maps.gstatic.com/mapfiles/transparent.png"] {
-  filter: brightness(0.5);
+  padding-top: 4px;
 }
 
 .info-window strong {
   color: #467ed0;
-  font-size: 20px;
-}
-
-.desc {
-  font-weight: bold;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .icon {
   width: 100%;
-  max-width: 400px;
-  max-height: 200px;
+  max-height: 180px;
   object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.desc {
+  font-weight: bold;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-main);
 }
 
 .adress {
   color: #363636;
   font-weight: 400;
+  margin: 0;
+  font-size: 0.88rem;
 }
 
-.link {
+/* Заменили <form> на <a> — стилизуем ссылку как кнопку */
+a.link {
+  display: block;
   width: 100%;
+  margin-top: 12px;
   padding: 10px 14px;
   background-color: var(--accent);
   color: #fff;
   border-radius: 10px;
-  border: 0;
   font-family: inherit;
   font-weight: 700;
+  font-size: 0.95rem;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 0.15s;
 }
 
-.link:hover {
-  cursor: pointer;
-  filter: brightness(1.05);
+a.link:hover {
+  filter: brightness(1.1);
 }
 
 .close-btn {
@@ -231,11 +240,22 @@ img[src="https://maps.gstatic.com/mapfiles/transparent.png"] {
   top: 5px;
   right: 5px;
   border: none;
-  background: transparent;
-  font-size: 16px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 13px;
+  line-height: 1;
   cursor: pointer;
+  color: var(--text-muted);
+  transition: background 0.15s;
 }
 
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.14);
+}
+
+/* ─── Адаптив: планшет ─── */
 @media (max-width: 900px) {
   .page-shell {
     padding: 28px 16px 40px;
@@ -254,22 +274,56 @@ img[src="https://maps.gstatic.com/mapfiles/transparent.png"] {
   .map-window {
     padding: 10px;
   }
+
+  .map-canvas {
+    height: clamp(380px, 55vh, 560px);
+  }
 }
 
+/* ─── Адаптив: мобилка ─── */
 @media (max-width: 600px) {
+  .page-shell {
+    padding: 20px 12px 32px;
+  }
+
   .hero-copy h1 {
     max-width: none;
-    font-size: clamp(2.2rem, 12vw, 3.4rem);
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 
   .hero-lead,
   .section-description,
   .feature-list li {
-    font-size: 0.98rem;
+    font-size: 0.95rem;
+  }
+
+  .hero-copy,
+  .hero-panel {
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .section-heading {
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .map-window {
+    padding: 8px;
+    border-radius: 20px;
   }
 
   .map-canvas {
-    height: 440px;
-    border-radius: 16px;
+    height: 420px;
+    border-radius: 14px;
+  }
+
+  /* Info window уже меньше экрана — ограничиваем */
+  .info-window {
+    max-width: 280px;
+  }
+
+  .icon {
+    max-height: 140px;
   }
 }
